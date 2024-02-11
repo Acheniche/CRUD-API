@@ -22,6 +22,9 @@ export const addUser = ( requestData: User, response: http.ServerResponse, data:
       data.push(newUser);
       response.writeHead(201, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify(newUser));
+      if (process.send) {
+        process.send(data);
+        }
     } else {
       response.writeHead(400, { 'Content-Type': 'application/json' });
       response.end(

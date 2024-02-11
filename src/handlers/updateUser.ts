@@ -15,6 +15,9 @@ export const updateUser = async (
       } else {
         response.writeHead(404, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify({ message: 'User not found' }));
+        if (process.send) {
+        process.send(data);
+        }
       }
     } else {
       response.writeHead(400, { 'Content-Type': 'application/json' });

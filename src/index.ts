@@ -6,6 +6,7 @@ import { getUser } from './handlers/getUser';
 import { addUser } from './handlers/addUser';
 import { updateUser } from './handlers/updateUser';
 import { deleteUser } from './handlers/deleteUser';
+import cluster from 'cluster'
 
 const PORT = process.env.PORT || 4000;
 
@@ -63,3 +64,8 @@ let mainData: User[] = [];
   .listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}, process id is ${process.pid}`);
   });
+  if (cluster.isWorker) {
+    process.on('message', (data: User[]) => {
+      mainData = data;
+    });
+  }
