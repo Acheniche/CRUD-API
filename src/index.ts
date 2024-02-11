@@ -9,17 +9,7 @@ import { deleteUser } from './handlers/deleteUser';
 
 const PORT = process.env.PORT || 4000;
 
-// const mainData: User[] = [
-//   {
-//     id:'1b9d6bcd-2bfd-4b2d-9b5d-2b8dfbbd4bed',
-//     username: 'Ache',
-//     age: 20,
-//     hobbies: ['js', 'ts'],
-//   },
-// ];
-
 let mainData: User[] = [];
-
 
  http.createServer((request: http.IncomingMessage, response: http.ServerResponse) => {
     if(request.url) {
@@ -73,31 +63,3 @@ let mainData: User[] = [];
   .listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}, process id is ${process.pid}`);
   });
-
-
-
-  const bodyParser = (req: http.IncomingMessage) => {
-    return new Promise((resolve, reject) => {
-      const body: any[] = [];
-  
-      req.on('data', (chunk) => body.push(chunk));
-      req.on('end', () => {
-        const rawData = Buffer.concat(body).toString();
-        const contentType = req.headers['content-type'];
-  
-        if (contentType?.includes('application/json')) {
-          try {
-            const parsedBody = JSON.parse(rawData);
-            resolve(parsedBody);
-          } catch (error) {
-            reject(error);
-          }
-        } else {
-          resolve(rawData);
-        }
-      })
-      req.on('error', (error) => {
-        reject(error);
-      })
-    })
-  }
