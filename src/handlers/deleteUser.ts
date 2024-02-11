@@ -5,7 +5,7 @@ import { validate } from 'uuid';
 export const deleteUser = (
     uuid: string, response: http.ServerResponse, data: User[] ) => {
     if (validate(uuid)) {
-      const userIndex: number = data.findIndex((user) => user.Id === uuid);
+      const userIndex: number = data.findIndex((user) => user.id === uuid);
       if (userIndex !== -1) {
         response.writeHead(204, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify({ message: 'User Deleted' }));

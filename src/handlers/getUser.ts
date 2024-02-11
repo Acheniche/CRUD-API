@@ -4,7 +4,7 @@ import { validate } from 'uuid';
 
 export const getUser = async (response: http.ServerResponse, data: User[], id: string ) => {
     if (validate(id)) {
-        const user = data.find((user) => user.Id === id);
+        const user = data.find((user) => user.id === id);
         if (user) {
             response.writeHead(200, { 'Content-Type': 'application/json' });
             response.end(JSON.stringify(user));

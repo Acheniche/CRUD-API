@@ -4,13 +4,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const validation = (user: User): string[] => {
     const errors: string[] = [];
-    if (!user.Username) {
+    if (!user.username) {
       errors.push('Username');
     }
-    if (!user.Age) {
+    if (!user.age) {
       errors.push('Age');
     }
-    if (!user.Hobbies) {
+    if (!user.hobbies) {
       errors.push('Hobbies');
     }
     return errors;
@@ -18,7 +18,7 @@ export const validation = (user: User): string[] => {
 
 export const addUser = ( requestData: User, response: http.ServerResponse, data: User[] ) => {
     if (validation(requestData).length === 0) {
-      const newUser: User = { Id: uuidv4(), ...requestData };
+      const newUser: User = { id: uuidv4(), ...requestData };
       data.push(newUser);
       response.writeHead(201, { 'Content-Type': 'application/json' });
       response.end(JSON.stringify(newUser));
